@@ -48,7 +48,13 @@ const features = [
 function Logo() {
   return (
     <a className="logo" href="#top" aria-label="CiveMate home">
-      <img src="/logo-horizontal.svg" alt="CiveMate" />
+      <svg className="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M6 8 54 6 58 54 10 58Z" className="logo-paper" />
+        <path d="M44 20C36 14 24 16 20 28S24 48 36 46C42 45 46 41 48 36" className="logo-cut" />
+        <path d="m54 6-4 10 8-2Z" className="logo-fold" />
+        <rect x="12" y="12" width="6" height="2" className="logo-staple" />
+      </svg>
+      <span className="wordmark">CIVE<i>M</i>ATE</span>
     </a>
   )
 }

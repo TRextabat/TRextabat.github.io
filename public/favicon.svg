@@ -1,45 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="cm-title cm-desc">
-  <title id="cm-title">CiveMate</title>
-  <desc id="cm-desc">A stylised tulip — CiveMate's mark, rooted in Turkish Iznik tile tradition. Terracotta outer petals frame a warm amber inner petal with a saffron seed.</desc>
-
-  <!-- Left petal -->
-  <path d="M 128 54
-           C 92 54, 62 86, 66 132
-           C 68 156, 82 176, 106 184
-           C 118 164, 122 132, 128 108
-           Z"
-        fill="#E63946"/>
-
-  <!-- Right petal — deeper terracotta for subtle depth -->
-  <path d="M 128 54
-           C 164 54, 194 86, 190 132
-           C 188 156, 174 176, 150 184
-           C 138 164, 134 132, 128 108
-           Z"
-        fill="#C92B39"/>
-
-  <!-- Centre petal — warm amber -->
-  <path d="M 128 70
-           C 110 74, 102 98, 106 128
-           C 108 152, 118 176, 128 192
-           C 138 176, 148 152, 150 128
-           C 154 98, 146 74, 128 70
-           Z"
-        fill="#F4A261"/>
-
-  <!-- Saffron seed at the cultural heart -->
-  <circle cx="128" cy="120" r="10" fill="#E9C46A"/>
-
-  <!-- Teal stem grounding the flower -->
-  <path d="M 128 192 C 128 208, 128 220, 128 234"
-        stroke="#2A9D8F"
-        stroke-width="5"
-        stroke-linecap="round"
-        fill="none"/>
-
-  <!-- Small leaf -->
-  <path d="M 128 214
-           C 144 208, 152 216, 150 226
-           C 140 226, 132 222, 128 218 Z"
-        fill="#2A9D8F"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">CiveMate</title>
+  <path d="M6 8 54 6 58 54 10 58Z" fill="#191713" stroke="#191713" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M44 20C36 14 24 16 20 28S24 48 36 46C42 45 46 41 48 36" fill="none" stroke="#EB4D32" stroke-width="6" stroke-linecap="round"/>
+  <path d="m54 6-4 10 8-2Z" fill="#F0C84B" stroke="#191713"/>
+  <rect x="12" y="12" width="6" height="2" fill="#FFFAF0"/>
 </svg>

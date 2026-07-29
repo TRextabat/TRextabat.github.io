@@ -45,8 +45,14 @@ button { color: inherit; }
   z-index: 30;
 }
 
-.logo { width: 176px; height: 52px; display: inline-flex; align-items: center; text-decoration: none; }
-.logo img { display: block; width: 100%; height: auto; }
+.logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
+.logo-mark { width: 38px; height: 38px; flex: 0 0 auto; overflow: visible; }
+.logo-paper { fill: var(--ink); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+.logo-cut { fill: none; stroke: var(--red); stroke-width: 6; stroke-linecap: round; }
+.logo-fold { fill: var(--yellow); stroke: var(--ink); stroke-width: 1; }
+.logo-staple { fill: var(--paper-light); }
+.wordmark { display: flex; align-items: center; font: 600 27px/1 Georgia, 'Times New Roman', serif; letter-spacing: -.045em; }
+.wordmark i { margin: 0 1px; padding: 2px 4px 3px; background: var(--red); color: var(--paper-light); font: inherit; font-style: normal; transform: rotate(-2deg); }
 
 .nav { display: flex; align-items: center; gap: 32px; font-size: 14px; font-weight: 650; }
 .nav a { text-decoration: none; }
@@ -453,7 +459,9 @@ footer > div { display: flex; justify-content: flex-end; gap: 22px; font: 500 11
 @media (max-width: 680px) {
   .site-header, .hero, .problem, .street-artists, .journey, footer { width: min(100% - 28px, 1380px); }
   .site-header { height: 72px; }
-  .logo { width: 148px; height: 46px; }
+  .logo { gap: 7px; }
+  .logo-mark { width: 34px; height: 34px; }
+  .wordmark { font-size: 23px; }
   .nav { display: none; }
   .nav-open { display: flex; position: absolute; top: 72px; inset-inline: -14px; background: var(--paper-light); border-bottom: var(--line); padding: 22px 14px; flex-direction: column; align-items: stretch; }
   .nav-open > a { display: block; padding: 10px 0; }
