@@ -46,7 +46,11 @@ const features = [
 ]
 
 function Logo() {
-  return <a className="logo" href="#top" aria-label="CiveMate home">Cive<span>Mate</span><i>✳</i></a>
+  return (
+    <a className="logo" href="#top" aria-label="CiveMate home">
+      <img src="/logo-horizontal.svg" alt="CiveMate" />
+    </a>
+  )
 }
 
 function CulturalMap({ activePin, onSelect }) {

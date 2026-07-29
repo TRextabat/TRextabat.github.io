@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" role="img" aria-labelledby="cm-title cm-desc">
+  <title id="cm-title">CiveMate</title>
+  <desc id="cm-desc">CiveMate horizontal lockup — stylised tulip mark paired with editorial wordmark.</desc>
+
+  <g transform="translate(10, 10) scale(0.39)">
+    <path d="M 128 54 C 92 54, 62 86, 66 132 C 68 156, 82 176, 106 184 C 118 164, 122 132, 128 108 Z" fill="#E63946"/>
+    <path d="M 128 54 C 164 54, 194 86, 190 132 C 188 156, 174 176, 150 184 C 138 164, 134 132, 128 108 Z" fill="#C92B39"/>
+    <path d="M 128 70 C 110 74, 102 98, 106 128 C 108 152, 118 176, 128 192 C 138 176, 148 152, 150 128 C 154 98, 146 74, 128 70 Z" fill="#F4A261"/>
+    <circle cx="128" cy="120" r="10" fill="#E9C46A"/>
+    <path d="M 128 192 C 128 208, 128 220, 128 234" stroke="#2A9D8F" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M 128 214 C 144 208, 152 216, 150 226 C 140 226, 132 222, 128 218 Z" fill="#2A9D8F"/>
+  </g>
+
+  <text x="124" y="78"
+        font-family="Fraunces, 'Playfair Display', 'Cormorant Garamond', Georgia, serif"
+        font-weight="600" font-size="62" letter-spacing="-1.2" fill="#18181B">CiveMate</text>
+
+  <path d="M 124 92 Q 230 86 460 92" stroke="#E9C46A" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>
