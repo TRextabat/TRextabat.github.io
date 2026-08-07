@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@87.5,400;87.5,500;87.5,600;87.5,700;100,400;100,600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+/* Fonts are loaded via <link rel="preconnect"> + stylesheet in index.html.
+   A CSS @import here would serialise the requests (HTML → CSS → import →
+   font file) and delay first paint by a full round trip. */
 
 :root {
   --paper: #f2e9d8;

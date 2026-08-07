@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@87.5,500;87.5,600&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --paper: #f2e9d8;
+        --ink: #191713;
+        --red: #eb4d32;
+        --cobalt: #3155c6;
+        --mint: #78c9a3;
+        --yellow: #f0c84b;
+        --violet: #8663b5;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        width: 1200px; height: 630px; overflow: hidden;
+        background: var(--paper); color: var(--ink);
+        font-family: 'Archivo', Arial, sans-serif;
+        position: relative;
+      }
+      .noise {
+        position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .14;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      }
+      .frame { position: absolute; inset: 24px; border: 3px solid var(--ink); z-index: 2; }
+      .content { position: relative; z-index: 3; padding: 58px 66px; height: 100%; display: flex; flex-direction: column; }
+
+      .top { display: flex; align-items: center; justify-content: space-between; }
+      .wordmark {
+        font-family: 'Anton', Impact, sans-serif; font-size: 40px; letter-spacing: .04em;
+      }
+      .wordmark i { font-style: normal; color: var(--red); }
+      .edition {
+        font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 600;
+        letter-spacing: .16em; border: 2px solid var(--ink); padding: 9px 16px;
+      }
+
+      /* Anton's caps nearly fill the em box, so a line-height under ~.95
+         makes consecutive lines collide. Keep it at .95. */
+      h1 {
+        font-family: 'Anton', Impact, sans-serif;
+        font-size: 86px; line-height: .95; letter-spacing: .005em;
+        margin-top: 28px; text-transform: uppercase;
+      }
+      h1 span { color: var(--red); }
+
+      .lede {
+        margin-top: 22px; font-size: 23px; line-height: 1.34; font-weight: 500; max-width: 660px;
+      }
+
+      .bottom { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; }
+      .pins { display: flex; gap: 13px; align-items: center; }
+      .pin {
+        width: 46px; height: 46px; border: 3px solid var(--ink); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .pin b { width: 13px; height: 13px; border-radius: 50%; background: var(--ink); }
+      .p1 { background: var(--cobalt); } .p2 { background: var(--yellow); }
+      .p3 { background: var(--mint); }   .p4 { background: var(--violet); }
+      .p5 { background: var(--red); }
+      .pin-label {
+        font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600;
+        letter-spacing: .13em; margin-left: 8px;
+      }
+
+      .stamp {
+        font-family: 'Anton', Impact, sans-serif; font-size: 26px; line-height: 1.02;
+        text-align: center; color: var(--paper); background: var(--ink);
+        padding: 15px 20px; transform: rotate(-4deg); letter-spacing: .03em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame"></div>
+    <div class="content">
+      <div class="top">
+        <div class="wordmark">CIVE<i>M</i>ATE</div>
+        <div class="edition">KADIKÖY · İSTANBUL</div>
+      </div>
+
+      <h1>Your city<br />has a <span>cultural</span><br />pulse.</h1>
+      <p class="lede">Concerts, readings, workshops and street sets on one live map — plus the collaborator you're missing.</p>
+
+      <div class="bottom">
+        <div class="pins">
+          <span class="pin p1"><b></b></span>
+          <span class="pin p2"><b></b></span>
+          <span class="pin p3"><b></b></span>
+          <span class="pin p4"><b></b></span>
+          <span class="pin p5"><b></b></span>
+          <span class="pin-label">5 ACTIVITIES NEARBY</span>
+        </div>
+        <div class="stamp">NO STAGE<br />REQUIRED</div>
+      </div>
+    </div>
+    <div class="noise"></div>
+  </body>
+</html>

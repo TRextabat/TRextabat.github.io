@@ -5,10 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f2e9d8" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@87.5,400;87.5,500;87.5,600;87.5,700;100,400;100,600&family=IBM+Plex+Mono:wght@500;600&display=swap" />
+
+    <title>CiveMate — Your city's cultural life on a live map</title>
+    <meta name="description" content="CiveMate puts Istanbul's cultural life on a live map. Find concerts, readings, workshops and street performances near you, open a role for the collaborator you're missing, or go with a +1. Starting in Kadıköy." />
     <link rel="canonical" href="https://civemate.com/" />
-    <meta name="description" content="CiveMate puts your city's cultural life on a live map. Join the waitlist for an early demo." />
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="CiveMate" />
+
+    <!-- Language targeting. Add the tr pair here the moment /tr/ actually
+         exists — an hreflang pointing at a 404 is worse than no hreflang. -->
+    <link rel="alternate" hreflang="en" href="https://civemate.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://civemate.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CiveMate" />
     <meta property="og:url" content="https://civemate.com/" />
-    <title>CiveMate — No stage required</title>
+    <meta property="og:title" content="CiveMate — Your city's cultural life on a live map" />
+    <meta property="og:description" content="Put a set, rehearsal, workshop or performance on the live map. Find collaborators and an audience. No stage required." />
+    <meta property="og:image" content="https://civemate.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CiveMate — a risograph map of Kadıköy with cultural activity pins." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="tr_TR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CiveMate — Your city's cultural life on a live map" />
+    <meta name="twitter:description" content="Put a set, rehearsal, workshop or performance on the live map. Find collaborators and an audience. No stage required." />
+    <meta name="twitter:image" content="https://civemate.com/og-image.png" />
+    <meta name="twitter:image:alt" content="CiveMate — a risograph map of Kadıköy with cultural activity pins." />
+
+    <!-- Machine-readable facts for search engines and AI answer engines. This
+         is what gets quoted when an assistant is asked "what is CiveMate?". -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://civemate.com/#organization",
+          "name": "CiveMate",
+          "url": "https://civemate.com/",
+          "email": "civemateapp@gmail.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://civemate.com/favicon.svg"
+          },
+          "description": "CiveMate is a cultural activities platform that puts a city's concerts, readings, workshops, rehearsals and street performances on one live map, and lets creators open roles for the collaborators they are missing.",
+          "slogan": "No stage required.",
+          "foundingDate": "2026",
+          "areaServed": {
+            "@type": "City",
+            "name": "Istanbul",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Istanbul",
+              "addressCountry": "TR"
+            }
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://civemate.com/#website",
+          "url": "https://civemate.com/",
+          "name": "CiveMate",
+          "description": "Your city's cultural life on a live map.",
+          "publisher": { "@id": "https://civemate.com/#organization" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://civemate.com/#app",
+          "name": "CiveMate",
+          "applicationCategory": "LifestyleApplication",
+          "operatingSystem": "iOS, Android",
+          "url": "https://civemate.com/",
+          "publisher": { "@id": "https://civemate.com/#organization" },
+          "description": "Discover cultural activities happening near you on a live map, create your own, open named roles for collaborators, and find a +1 so you never have to go alone.",
+          "featureList": [
+            "Live map of cultural activities happening nearby",
+            "Create an activity and open named collaborator roles",
+            "+1 buddy mode for going to events with someone",
+            "Shared memory pages with photos, comments and credits",
+            "Portfolio credit for creators",
+            "Verified profiles for venues and institutions"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://civemate.com/#faq",
+          "inLanguage": "en",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is CiveMate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CiveMate is a cultural activities platform that puts your city's cultural life on one live map. You can see planned shows, spontaneous sessions, workshops and readings near you, create your own activity, and find the collaborators or company you need to make it happen."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does CiveMate launch first?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CiveMate is starting in Kadıköy, Istanbul, with the first neighbourhood edition in 2026. Izmir and Antalya follow as further priority cities."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does it cost anything to join an activity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Activities on CiveMate are always free to join."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is +1 buddy mode?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "+1 buddy mode lets you filter for activities where someone is open to bringing a companion. You connect with a person who is already going, and the event itself breaks the ice, so an empty theatre seat or a concert you didn't want to attend alone stops being a reason to stay home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is CiveMate for?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CiveMate is for creators and street artists who want an audience and collaborators, for culture lovers looking for something to do nearby, and for venues, theatres, galleries and cultural centres, who join the same map with verified profiles and team tools."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do creators find missing collaborators?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "When you create an activity you can open a named role — a bassist, a photographer, a dancer, a maker — and people nearby can apply to fill it. You approve who joins, and everyone's contribution is credited on the activity page afterwards."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <noscript>
+      <style>
+        /* Scroll-reveal starts at opacity:0 and is switched on by an
+           IntersectionObserver. Without JS that would hide most of the page,
+           so unhide everything for no-JS visitors and text-mode crawlers. */
+        [data-reveal] > * { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <!--
@@ -18,7 +172,7 @@
       SIGNATURE: Layered map pins and paper architecture respond like a tabletop city.
       RISK: Tactile expression never obscures the offer, controls, or form.
     -->
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
