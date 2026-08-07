@@ -51,4 +51,6 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
+# Plain-language summary for answer engines: https://civemate.com/llms.txt
+
 Sitemap: https://civemate.com/sitemap.xml

@@ -12,42 +12,27 @@ import {
   Users,
   X,
 } from 'lucide-react'
+import { copy } from './copy'
 
-const activities = [
-  { id: 1, title: 'Rooftop acoustic night', meta: 'Moda · Tonight, 20:30', type: 'Music · +1 open', icon: Music2, className: 'pin-music', image: '/images/rooftop-music.webp', coordinates: [29.0267, 40.9818], people: '18 going' },
-  { id: 2, title: 'One-act play reading', meta: 'Yeldeğirmeni · Fri, 19:00', type: 'Theatre · +1 open', icon: Theater, className: 'pin-theatre', image: '/images/theatre-reading.webp', coordinates: [29.0358, 40.9952], people: '8 going' },
-  { id: 3, title: 'Street sketch circle', meta: 'Caferağa · Sat, 14:00', type: 'Visual art', icon: Paintbrush, className: 'pin-art', image: '/images/sketch-circle.webp', coordinates: [29.0229, 40.9874], people: '12 going' },
-  { id: 4, title: 'Bassist wanted', meta: 'Osmanağa · This week', type: 'Open collaborator role', icon: Users, className: 'pin-role', image: '/images/bassist-wanted.webp', coordinates: [29.0296, 40.9915], people: '1 role open' },
-  { id: 5, title: 'Seaside set — live now', meta: 'Moda Sahili · Happening now', type: 'Street performance · Audience welcome', icon: Music2, className: 'pin-live', image: '/images/street-performer.webp', coordinates: [29.0231, 40.9798], people: 'Come listen' },
+// Presentation stays here; the words live in copy.js. Index-matched to
+// copy[lang].activities / copy[lang].features.cards.
+const activityStyle = [
+  { icon: Music2, className: 'pin-music', image: '/images/rooftop-music.webp', coordinates: [29.0267, 40.9818] },
+  { icon: Theater, className: 'pin-theatre', image: '/images/theatre-reading.webp', coordinates: [29.0358, 40.9952] },
+  { icon: Paintbrush, className: 'pin-art', image: '/images/sketch-circle.webp', coordinates: [29.0229, 40.9874] },
+  { icon: Users, className: 'pin-role', image: '/images/bassist-wanted.webp', coordinates: [29.0296, 40.9915] },
+  { icon: Music2, className: 'pin-live', image: '/images/street-performer.webp', coordinates: [29.0231, 40.9798] },
 ]
 
-const features = [
-  {
-    eyebrow: 'DISCOVER',
-    title: 'See the city come alive.',
-    body: 'Open one map for planned shows, spontaneous sessions, workshops, readings, and everything in between.',
-    icon: MapPin,
-    className: 'feature-cobalt',
-  },
-  {
-    eyebrow: 'COLLABORATE',
-    title: 'Find the missing person.',
-    body: 'Create an activity, open a named role, and meet the bassist, photographer, dancer, or maker who completes it.',
-    icon: Users,
-    className: 'feature-red',
-  },
-  {
-    eyebrow: '+1 BUDDY MODE',
-    title: 'Go together, not alone.',
-    body: 'Filter for +1-open activities, connect with someone already going, and let the event break the ice.',
-    icon: Plus,
-    className: 'feature-yellow',
-  },
+const featureStyle = [
+  { icon: MapPin, className: 'feature-cobalt' },
+  { icon: Users, className: 'feature-red' },
+  { icon: Plus, className: 'feature-yellow' },
 ]
 
-function Logo() {
+function Logo({ t }) {
   return (
-    <a className="logo" href="#top" aria-label="CiveMate home">
+    <a className="logo" href="#top" aria-label={t.logoAria}>
       <svg className="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
         <path d="M6 8 54 6 58 54 10 58Z" className="logo-paper" />
         <path d="M44 20C36 14 24 16 20 28S24 48 36 46C42 45 46 41 48 36" className="logo-cut" />
@@ -59,7 +44,7 @@ function Logo() {
   )
 }
 
-function CulturalMap({ activePin, onSelect }) {
+function CulturalMap({ t, activities, activePin, onSelect }) {
   const selected = activities.find((activity) => activity.id === activePin)
   const markerPositions = [
     { left: '48%', top: '39%' },
@@ -70,12 +55,12 @@ function CulturalMap({ activePin, onSelect }) {
   ]
 
   return (
-    <div className="real-map-shell map-enter" aria-label="Illustrated map of cultural activities in Kadıköy">
+    <div className="real-map-shell map-enter" aria-label={t.map.aria}>
       <div className="map-live-header">
-        <span><i /> LIVE / KADIKÖY</span>
-        <strong>{activities.length} ACTIVITIES NEARBY</strong>
+        <span><i /> {t.map.live}</span>
+        <strong>{t.map.nearby(activities.length)}</strong>
       </div>
-      <img className="static-map" src="/images/kadikoy-real-art-map.webp" alt="Real street, coastline, park and building map of Kadıköy" />
+      <img className="static-map" src="/images/kadikoy-real-art-map.webp" alt={t.map.imageAlt} />
       <div className="map-ink" aria-hidden="true" />
       {activities.map((activity, index) => (
         <button
@@ -84,7 +69,7 @@ function CulturalMap({ activePin, onSelect }) {
           className={`activity-marker static-marker ${activity.className} ${activePin === activity.id ? 'marker-active' : ''}`}
           style={markerPositions[index]}
           onClick={() => onSelect(activity.id)}
-          aria-label={`Show ${activity.title}`}
+          aria-label={t.map.show(activity.title)}
         >
           <span className="marker-photo"><img src={activity.image} alt="" /></span>
           <span className="marker-dot" />
@@ -96,27 +81,31 @@ function CulturalMap({ activePin, onSelect }) {
           <span>{selected.type}</span>
           <strong>{selected.title}</strong>
           <small>{selected.meta} · {selected.people}</small>
-          <button type="button">View activity <ArrowRight size={15} /></button>
+          <button type="button">{t.map.view} <ArrowRight size={15} /></button>
         </div>
       </article>
-      <div className="map-photo-stack" aria-label="More nearby activities">
+      <div className="map-photo-stack" aria-label={t.map.more}>
         {activities.filter((activity) => activity.id !== activePin).slice(0, 2).map((activity) => (
-          <button key={activity.id} type="button" onClick={() => onSelect(activity.id)} aria-label={`Show ${activity.title}`}>
+          <button key={activity.id} type="button" onClick={() => onSelect(activity.id)} aria-label={t.map.show(activity.title)}>
             <img src={activity.image} alt="" />
           </button>
         ))}
         <span>+{activities.length - 3}</span>
       </div>
-      <div className="map-stamp">NO<br />STAGE<br />REQUIRED</div>
-      <a className="map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">Real Kadıköy map · © OpenStreetMap contributors</a>
+      <div className="map-stamp">{t.map.stamp[0]}<br />{t.map.stamp[1]}<br />{t.map.stamp[2]}</div>
+      <a className="map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">{t.map.attribution}</a>
     </div>
   )
 }
 
-function App() {
+function App({ lang = 'en' }) {
+  const t = copy[lang] ?? copy.en
+  const activities = t.activities.map((activity, i) => ({ ...activityStyle[i], ...activity, id: i + 1 }))
+  const features = t.features.cards.map((card, i) => ({ ...featureStyle[i], ...card }))
+
   const [activePin, setActivePin] = useState(5)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', role: 'Culture explorer' })
+  const [form, setForm] = useState({ name: '', email: '', role: t.waitlist.roles[0] })
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
 
@@ -149,7 +138,7 @@ function App() {
   const submitWaitlist = async (event) => {
     event.preventDefault()
     if (!form.name.trim() || !/^\S+@\S+\.\S+$/.test(form.email)) {
-      setError('Add your name and a valid email so we know where to send the demo invite.')
+      setError(t.waitlist.error)
       return
     }
 
@@ -161,7 +150,7 @@ function App() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           ...form,
-          source: 'civemate-landing',
+          source: `civemate-landing-${lang}`,
           _subject: `New CiveMate demo request — ${form.role}`,
           _template: 'table',
         }),
@@ -170,7 +159,7 @@ function App() {
       setStatus('success')
     } catch {
       setStatus('idle')
-      setError('The list could not be reached. Please try again in a moment.')
+      setError(t.waitlist.networkError)
     }
   }
 
@@ -178,14 +167,21 @@ function App() {
     <>
       <div className="noise" aria-hidden="true" />
       <header className="site-header" id="top">
-        <Logo />
-        <nav className={menuOpen ? 'nav nav-open' : 'nav'} aria-label="Main navigation">
-          <a href="#how" onClick={() => setMenuOpen(false)}>How it works</a>
-          <a href="#creators" onClick={() => setMenuOpen(false)}>For creators</a>
-          <a href="#inside" onClick={() => setMenuOpen(false)}>Inside the app</a>
-          <button className="nav-cta" onClick={scrollToWaitlist}>Join the demo waitlist <ArrowRight size={17} /></button>
+        <Logo t={t} />
+        <nav className={menuOpen ? 'nav nav-open' : 'nav'} aria-label={t.nav.aria}>
+          <a href="#how" onClick={() => setMenuOpen(false)}>{t.nav.how}</a>
+          <a href="#creators" onClick={() => setMenuOpen(false)}>{t.nav.creators}</a>
+          <a href="#inside" onClick={() => setMenuOpen(false)}>{t.nav.inside}</a>
+          <button className="nav-cta" onClick={scrollToWaitlist}>{t.nav.cta} <ArrowRight size={17} /></button>
+          {/* Real anchors, not a JS locale swap: crawlers need a followable
+              link between the two documents, and users need a visible way to
+              reach a language hreflang alone never shows them. */}
+          <div className="lang-switch" aria-label={t.nav.langAria}>
+            <a href="/" hrefLang="en" aria-current={lang === 'en' ? 'true' : undefined} className={lang === 'en' ? 'lang-on' : ''}>EN</a>
+            <a href="/tr" hrefLang="tr" aria-current={lang === 'tr' ? 'true' : undefined} className={lang === 'tr' ? 'lang-on' : ''}>TR</a>
+          </div>
         </nav>
-        <button className="menu-button" onClick={() => setMenuOpen((value) => !value)} aria-expanded={menuOpen} aria-label="Toggle navigation">
+        <button className="menu-button" onClick={() => setMenuOpen((value) => !value)} aria-expanded={menuOpen} aria-label={t.nav.toggle}>
           {menuOpen ? <X /> : <Menu />}
         </button>
       </header>
@@ -193,46 +189,50 @@ function App() {
       <main>
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy hero-enter">
-            <div className="edition">ISTANBUL · FIRST EDITION · 2026</div>
-            <h1 id="hero-title">YOUR CITY<br />HAS A <span>CULTURAL</span><br />PULSE.</h1>
-            <p className="hero-lede">CiveMate turns cultural ideas into real-world activity. Put a set, rehearsal, workshop, or performance on the live map; find collaborators and an audience; then keep the memory, credit, and community that follow.</p>
+            <div className="edition">{t.hero.edition}</div>
+            <h1 id="hero-title">{t.hero.line1}<br />{t.hero.line2}<span>{t.hero.highlight}</span><br />{t.hero.line3}</h1>
+            <p className="hero-lede">{t.hero.lede}</p>
             <div className="hero-actions">
-              <button className="button button-primary" onClick={scrollToWaitlist}>Get an early demo <ArrowRight size={20} /></button>
-              <a className="text-link" href="#inside">See what the app does <ArrowDown size={18} /></a>
+              <button className="button button-primary" onClick={scrollToWaitlist}>{t.hero.primary} <ArrowRight size={20} /></button>
+              <a className="text-link" href="#inside">{t.hero.secondary} <ArrowDown size={18} /></a>
             </div>
-            <p className="microcopy">Starting in Kadıköy · For creators, culture lovers, and curious neighbors</p>
+            <p className="microcopy">{t.hero.microcopy}</p>
           </div>
 
           <div className="map-stage">
-            <CulturalMap activePin={activePin} onSelect={setActivePin} />
+            <CulturalMap t={t} activities={activities} activePin={activePin} onSelect={setActivePin} />
             <div className="map-shadow" aria-hidden="true" />
-            <div className="map-depth-label" aria-hidden="true">CULTURE / IN REAL SPACE</div>
+            <div className="map-depth-label" aria-hidden="true">{t.map.depth}</div>
           </div>
         </section>
 
-        <div className="ticker" aria-label="CiveMate capabilities">
+        <div className="ticker" aria-label={t.ticker.aria}>
           <div>
-            <span>HAPPENING NOW</span><b>✳</b><span>OPEN CREATIVE ROLES</span><b>✳</b><span>+1 BUDDY MODE</span><b>✳</b><span>MEMORY PAGES</span><b>✳</b><span>CULTURAL COMMUNITIES</span><b>✳</b>
-            <span aria-hidden="true">HAPPENING NOW</span><b aria-hidden="true">✳</b><span aria-hidden="true">OPEN CREATIVE ROLES</span><b aria-hidden="true">✳</b>
+            {t.ticker.items.map((item) => (
+              <span key={item}>{item}<b>✳</b></span>
+            ))}
+            {t.ticker.items.slice(0, 2).map((item) => (
+              <span key={`dup-${item}`} aria-hidden="true">{item}<b aria-hidden="true">✳</b></span>
+            ))}
           </div>
         </div>
 
         <section className="problem" id="how" data-reveal>
-          <div className="section-label">WHY CIVEMATE</div>
+          <div className="section-label">{t.problem.label}</div>
           <div className="problem-copy">
-            <h2>CULTURAL LIFE IS EVERYWHERE.<br /><em>AND INVISIBLE.</em></h2>
-            <p>Jam sessions hide in group chats. Readings vanish from stories. A rehearsal needs one more person. A theatre seat stays empty because someone doesn’t want to go alone.</p>
+            <h2>{t.problem.h2a}<br /><em>{t.problem.h2b}</em></h2>
+            <p>{t.problem.body}</p>
           </div>
           <aside className="pull-quote">
             <span>“</span>
-            <p>How was I supposed to know about that?</p>
+            <p>{t.problem.quote}</p>
           </aside>
         </section>
 
         <section className="features" id="inside" aria-labelledby="features-title" data-reveal>
           <div className="section-heading">
-            <div className="section-label">INSIDE THE APP</div>
-            <h2 id="features-title">FROM “WHAT’S ON?”<br />TO “I’M IN.”</h2>
+            <div className="section-label">{t.features.label}</div>
+            <h2 id="features-title">{t.features.h2a}<br />{t.features.h2b}</h2>
           </div>
           <div className="feature-grid">
             {features.map((feature) => {
@@ -251,95 +251,89 @@ function App() {
 
         <section className="street-artists" id="creators" aria-labelledby="street-title" data-reveal>
           <div className="street-photo">
-            <img src="/images/street-performer.webp" alt="Street musician playing an acoustic set beside the Kadıköy waterfront" />
-            <span>LIVE · MODA SAHİLİ</span>
+            <img src="/images/street-performer.webp" alt={t.street.imageAlt} />
+            <span>{t.street.badge}</span>
           </div>
           <div className="street-copy">
-            <div className="section-label">FOR STREET ARTISTS</div>
-            <h2 id="street-title">THE STREET<br />IS A <em>STAGE.</em></h2>
-            <p>Playing by the water tonight? Mark the set “happening now,” appear on the live map, welcome nearby listeners, or open a role for another musician or photographer.</p>
-            <div className="creator-flow" aria-label="Street artist journey">
-              <span><b>01</b> Go live</span>
-              <span><b>02</b> Gather a crowd</span>
-              <span><b>03</b> Find your people</span>
-              <span><b>04</b> Keep the credit</span>
+            <div className="section-label">{t.street.label}</div>
+            <h2 id="street-title">{t.street.h2a}<br />{t.street.h2b}<em>{t.street.h2c}</em></h2>
+            <p>{t.street.body}</p>
+            <div className="creator-flow" aria-label={t.street.flowAria}>
+              {t.street.flow.map((step, i) => (
+                <span key={step}><b>0{i + 1}</b> {step}</span>
+              ))}
             </div>
           </div>
         </section>
 
         <section className="journey" aria-labelledby="journey-title" data-reveal>
           <div className="journey-copy">
-            <div className="section-label">ONE ACTIVITY · MANY PATHS</div>
-            <h2 id="journey-title">MAKE A NIGHT<br />HAPPEN.</h2>
-            <p>Every journey meets at an activity: someone starts it, someone fills the missing role, someone comes with a new friend, and everyone leaves with a shared memory.</p>
+            <div className="section-label">{t.journey.label}</div>
+            <h2 id="journey-title">{t.journey.h2a}<br />{t.journey.h2b}</h2>
+            <p>{t.journey.body}</p>
           </div>
           <ol className="journey-steps">
-            <li><b>1</b><span><strong>CREATE</strong>Put an idea on the map and open the roles you need.</span></li>
-            <li><b>2</b><span><strong>CONNECT</strong>Approve collaborators and welcome visitors or buddies.</span></li>
-            <li><b>3</b><span><strong>SHOW UP</strong>Meet in the real world. Make, watch, listen, join.</span></li>
-            <li><b>4</b><span><strong>REMEMBER</strong>Keep photos, conversation, and activity credits together.</span></li>
+            {t.journey.steps.map((step, i) => (
+              <li key={step.title}><b>{i + 1}</b><span><strong>{step.title}</strong>{step.body}</span></li>
+            ))}
           </ol>
         </section>
 
         <section className="afterlife" aria-labelledby="afterlife-title" data-reveal>
           <div className="afterlife-heading">
-            <div className="section-label">AFTER THE ACTIVITY</div>
-            <h2 id="afterlife-title">THE NIGHT ENDS.<br /><span>THE CONNECTION DOESN’T.</span></h2>
-            <p>CiveMate keeps the value of showing up alive—so one activity can become a body of work, a circle of people, and the beginning of the next idea.</p>
+            <div className="section-label">{t.afterlife.label}</div>
+            <h2 id="afterlife-title">{t.afterlife.h2a}<br /><span>{t.afterlife.h2b}</span></h2>
+            <p>{t.afterlife.body}</p>
           </div>
           <div className="afterlife-rows">
-            <article><b>01</b><h3>Shared memory</h3><p>Photos, video, comments, ratings, and everyone’s contribution live on one activity page.</p></article>
-            <article><b>02</b><h3>Portfolio credit</h3><p>Creators turn real participation into a curated record of what they made and who they made it with.</p></article>
-            <article><b>03</b><h3>Stay connected</h3><p>Follow people, share posts and stories, continue in DMs or group chat, and send the next invitation.</p></article>
-            <article><b>04</b><h3>Build community</h3><p>Interest, neighborhood, and creator communities make it easier for the next activity to begin.</p></article>
+            {t.afterlife.rows.map((row, i) => (
+              <article key={row.title}><b>0{i + 1}</b><h3>{row.title}</h3><p>{row.body}</p></article>
+            ))}
           </div>
           <aside className="institution-note">
-            <span>VENUES + INSTITUTIONS</span>
-            <p>Theatres, galleries, and cultural centres join the same map with verified profiles, team tools, and attendance insight.</p>
+            <span>{t.afterlife.institutionLabel}</span>
+            <p>{t.afterlife.institutionBody}</p>
           </aside>
         </section>
 
         <section className="waitlist" id="waitlist" aria-labelledby="waitlist-title" data-reveal>
           <div className="waitlist-copy">
-            <div className="section-label light">DEMO WAITLIST · ISTANBUL</div>
-            <h2 id="waitlist-title">HELP US<br /><span>PUT THE FIRST</span><br />PINS ON THE MAP.</h2>
-            <p>Join the early demo list. We’ll invite a small group of creators and culture explorers to see CiveMate, try the core flows, and help shape the first neighborhood launch.</p>
-            <div className="promise"><Check size={18} /> Demo invitations only. No endless newsletter.</div>
+            <div className="section-label light">{t.waitlist.label}</div>
+            <h2 id="waitlist-title">{t.waitlist.h2a}<br /><span>{t.waitlist.h2b}</span><br />{t.waitlist.h2c}</h2>
+            <p>{t.waitlist.body}</p>
+            <div className="promise"><Check size={18} /> {t.waitlist.promise}</div>
           </div>
 
           <div className="form-poster">
             {status === 'success' ? (
               <div className="success-state" role="status">
                 <div className="success-mark"><Check size={38} /></div>
-                <span>YOU’RE ON THE MAP</span>
-                <h3>Thanks, {form.name.split(' ')[0]}.</h3>
-                <p>We’ll use <strong>{form.email}</strong> for your CiveMate demo invitation.</p>
+                <span>{t.waitlist.successBadge}</span>
+                <h3>{t.waitlist.successTitle(form.name.split(' ')[0])}</h3>
+                <p>{t.waitlist.successBodyPre}<strong>{form.email}</strong>{t.waitlist.successBodyPost}</p>
               </div>
             ) : (
               <form onSubmit={submitWaitlist} noValidate>
-                <div className="form-number">NO. 001 / EARLY ACCESS</div>
+                <div className="form-number">{t.waitlist.formNumber}</div>
                 <label>
-                  Your name
-                  <input name="name" value={form.name} onChange={updateField} autoComplete="name" placeholder="How should we call you?" />
+                  {t.waitlist.nameLabel}
+                  <input name="name" value={form.name} onChange={updateField} autoComplete="name" placeholder={t.waitlist.namePlaceholder} />
                 </label>
                 <label>
-                  Email address
-                  <input name="email" value={form.email} onChange={updateField} autoComplete="email" inputMode="email" placeholder="you@example.com" />
+                  {t.waitlist.emailLabel}
+                  <input name="email" value={form.email} onChange={updateField} autoComplete="email" inputMode="email" placeholder={t.waitlist.emailPlaceholder} />
                 </label>
                 <label>
-                  I’m joining as
+                  {t.waitlist.roleLabel}
                   <select name="role" value={form.role} onChange={updateField}>
-                    <option>Culture explorer</option>
-                    <option>Artist or creator</option>
-                    <option>Collective or community</option>
-                    <option>Venue or institution</option>
+                    {t.waitlist.roles.map((role) => <option key={role}>{role}</option>)}
                   </select>
                 </label>
                 {error && <p className="form-error" role="alert">{error}</p>}
                 <button className="button form-button" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'Adding your pin…' : <>Join the demo waitlist <ArrowRight size={20} /></>}
+                  {status === 'loading' ? t.waitlist.submitting : <>{t.waitlist.submit} <ArrowRight size={20} /></>}
                 </button>
-                <p className="form-note">By joining, you agree to receive emails about the CiveMate demo. Unsubscribe anytime.</p>
+                <p className="form-note">{t.waitlist.note}</p>
               </form>
             )}
           </div>
@@ -347,9 +341,9 @@ function App() {
       </main>
 
       <footer>
-        <Logo />
-        <p>Sahne gerekmez. No stage required.</p>
-        <div><a href="mailto:civemateapp@gmail.com">civemateapp@gmail.com</a><span>© 2026 CiveMate</span></div>
+        <Logo t={t} />
+        <p>{t.footer.tagline}</p>
+        <div><a href="mailto:civemateapp@gmail.com">civemateapp@gmail.com</a><span>{t.footer.rights}</span></div>
       </footer>
     </>
   )
