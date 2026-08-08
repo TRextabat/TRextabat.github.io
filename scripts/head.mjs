@@ -2,29 +2,10 @@
 // source of truth in src/copy.js. Two hand-maintained HTML heads would drift —
 // and a stale canonical or a missing hreflang pair is the kind of SEO bug that
 // is invisible until a search engine quietly picks the wrong page.
-import { meta } from '../src/copy.js'
+import { meta, copy, keywords } from '../src/copy.js'
 
 const ORIGIN = 'https://civemate.com'
 const url = (locale) => `${ORIGIN}${meta[locale].path}`
-
-const faq = {
-  en: [
-    ['What is CiveMate?', "CiveMate is a cultural activities platform that puts your city's cultural life on one live map. You can see planned shows, spontaneous sessions, workshops and readings near you, create your own activity, and find the collaborators or company you need to make it happen."],
-    ['Where does CiveMate launch first?', 'CiveMate is starting in Kadıköy, Istanbul, with the first neighbourhood edition in 2026. Izmir and Antalya follow as further priority cities.'],
-    ['Does it cost anything to join an activity?', 'No. Activities on CiveMate are always free to join.'],
-    ['What is +1 buddy mode?', "+1 buddy mode lets you filter for activities where someone is open to bringing a companion. You connect with a person who is already going, and the event itself breaks the ice, so an empty theatre seat or a concert you didn't want to attend alone stops being a reason to stay home."],
-    ['Who is CiveMate for?', 'CiveMate is for creators and street artists who want an audience and collaborators, for culture lovers looking for something to do nearby, and for venues, theatres, galleries and cultural centres, who join the same map with verified profiles and team tools.'],
-    ['How do creators find missing collaborators?', "When you create an activity you can open a named role — a bassist, a photographer, a dancer, a maker — and people nearby can apply to fill it. You approve who joins, and everyone's contribution is credited on the activity page afterwards."],
-  ],
-  tr: [
-    ['CiveMate nedir?', 'CiveMate, şehrinin kültür hayatını tek bir canlı haritada toplayan bir kültürel etkinlik platformudur. Yakınındaki planlanmış konserleri, anlık sessionları, atölyeleri ve okumaları görebilir, kendi etkinliğini oluşturabilir ve onu gerçekleştirmek için ihtiyacın olan üreticileri ya da arkadaşlığı bulabilirsin.'],
-    ['CiveMate ilk nerede başlıyor?', "CiveMate 2026'da ilk mahalle sürümüyle İstanbul Kadıköy'de başlıyor. Ardından öncelikli şehirler olarak İzmir ve Antalya geliyor."],
-    ['Etkinliğe katılmak ücretli mi?', 'Hayır. CiveMate’teki etkinliklere katılmak her zaman ücretsizdir.'],
-    ['+1 modu nedir?', '+1 modu, birinin yanında biri getirmeye açık olduğu etkinlikleri filtrelemeni sağlar. Zaten gidecek biriyle bağlantı kurarsın ve buzları etkinliğin kendisi kırar; böylece boş bir tiyatro koltuğu ya da yalnız gitmek istemediğin bir konser evde kalma sebebi olmaktan çıkar.'],
-    ['CiveMate kimler için?', 'CiveMate; seyirci ve birlikte üretecek insan arayan üreticiler ve sokak sanatçıları, yakınında yapacak bir şey arayan kültür severler ve aynı haritaya doğrulanmış profiller ve ekip araçlarıyla katılan mekânlar, tiyatrolar, galeriler ve kültür merkezleri içindir.'],
-    ['Üretenler eksik ekip arkadaşlarını nasıl buluyor?', 'Bir etkinlik oluştururken adı konmuş bir rol açabilirsin — basçı, fotoğrafçı, dansçı, üretici — ve yakındaki insanlar bu role başvurabilir. Kimin katılacağını sen onaylarsın ve herkesin katkısı sonrasında etkinlik sayfasında emek olarak görünür.'],
-  ],
-}
 
 const orgDescription = {
   en: "CiveMate is a cultural activities platform that puts a city's concerts, readings, workshops, rehearsals and street performances on one live map, and lets creators open roles for the collaborators they are missing.",
@@ -95,6 +76,11 @@ function jsonLd(locale) {
         description: m.description,
         isPartOf: { '@id': `${ORIGIN}/#website` },
         inLanguage: locale,
+        keywords: keywords[locale].join(', '),
+        about: [
+          'Concert', 'Theatre', 'Cinema', 'Exhibition', 'Dance',
+          'Workshop', 'Street performance', 'Cultural event',
+        ].map((name) => ({ '@type': 'Thing', name })),
       },
       {
         '@type': 'SoftwareApplication',
@@ -111,7 +97,7 @@ function jsonLd(locale) {
         '@type': 'FAQPage',
         '@id': `${url(locale)}#faq`,
         inLanguage: locale,
-        mainEntity: faq[locale].map(([q, a]) => ({
+        mainEntity: copy[locale].faq.items.map(({ q, a }) => ({
           '@type': 'Question',
           name: q,
           acceptedAnswer: { '@type': 'Answer', text: a },
@@ -133,6 +119,7 @@ export function buildHead(locale) {
 
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="CiveMate" />
+    <meta name="keywords" content="${escape(keywords[locale].join(', '))}" />
 
 ${alternates}
     <link rel="alternate" hreflang="x-default" href="${url('en')}" />

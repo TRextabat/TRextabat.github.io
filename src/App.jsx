@@ -296,6 +296,23 @@ function App({ lang = 'en' }) {
           </aside>
         </section>
 
+        {/* Native <details>: open/close with zero JS, so the answers are in the
+            HTML a crawler reads whether or not it renders scripts. */}
+        <section className="faq" id="faq" aria-labelledby="faq-title" data-reveal>
+          <div className="faq-heading">
+            <div className="section-label">{t.faq.label}</div>
+            <h2 id="faq-title">{t.faq.h2a}<br /><em>{t.faq.h2b}</em></h2>
+          </div>
+          <div className="faq-list">
+            {t.faq.items.map((item, i) => (
+              <details key={item.q} open={i === 0}>
+                <summary><span>{item.q}</span><i aria-hidden="true" /></summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
         <section className="waitlist" id="waitlist" aria-labelledby="waitlist-title" data-reveal>
           <div className="waitlist-copy">
             <div className="section-label light">{t.waitlist.label}</div>

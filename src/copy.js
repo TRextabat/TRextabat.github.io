@@ -7,6 +7,40 @@
 
 export const LOCALES = ['en', 'tr']
 
+// Metadata only — never rendered into the interface. Consumed by
+// scripts/head.mjs for the JSON-LD `keywords`/`about` fields and the (legacy,
+// largely ignored) keywords meta tag.
+//
+// Caveat worth remembering: Google has ignored <meta name="keywords"> since
+// 2009, and no search engine ranks a page for a term that appears only in
+// metadata. These help an engine that already has the page classify it
+// correctly — they do not make the page rank for terms it never mentions.
+export const keywords = {
+  en: [
+    'cultural activities', 'events near me', 'what to do tonight',
+    'concert', 'live music', 'gig', 'theatre', 'play', 'performance',
+    'cinema', 'film screening', 'exhibition', 'gallery opening',
+    'poetry reading', 'book reading', 'workshop', 'art class',
+    'dance', 'stand-up comedy', 'open mic', 'jam session', 'rehearsal',
+    'street performance', 'busking', 'festival',
+    'Istanbul events', 'Kadıköy', 'Moda', 'things to do in Istanbul',
+    'free events Istanbul', 'meet people at events', 'go to a concert with someone',
+    'find a bassist', 'find a photographer', 'find collaborators', 'open roles',
+  ],
+  tr: [
+    'kültürel etkinlikler', 'yakınımdaki etkinlikler', 'bu akşam ne yapsam',
+    'konser', 'canlı müzik', 'tiyatro', 'oyun', 'performans',
+    'sinema', 'film gösterimi', 'sergi', 'galeri açılışı',
+    'şiir okuma', 'kitap okuma', 'atölye', 'sanat kursu',
+    'dans', 'stand-up', 'açık mikrofon', 'jam', 'prova',
+    'sokak performansı', 'sokak müzisyeni', 'festival',
+    'İstanbul etkinlik', 'Kadıköy', 'Moda', 'İstanbul’da ne yapılır',
+    'ücretsiz etkinlik İstanbul', 'etkinlikte insanlarla tanışmak',
+    'birlikte konsere gidecek arkadaş', 'basçı arıyorum', 'fotoğrafçı arıyorum',
+    'grup arkadaşı arıyorum', 'açık roller',
+  ],
+}
+
 export const meta = {
   en: {
     lang: 'en',
@@ -158,6 +192,49 @@ export const copy = {
       successBodyPre: 'We’ll use ',
       successBodyPost: ' for your CiveMate demo invitation.',
     },
+    // Questions are phrased the way people actually search, not the way a
+    // brand would introduce itself — this is the only section on the page that
+    // targets intent ("what's on tonight") rather than the brand name. Also
+    // the visible counterpart the FAQPage structured data is required to match.
+    faq: {
+      label: 'QUESTIONS',
+      h2a: 'WHAT PEOPLE',
+      h2b: 'ASK US.',
+      items: [
+        {
+          q: 'What is CiveMate?',
+          a: "CiveMate is a cultural activities platform that puts your city's cultural life on one live map. You can see concerts, theatre, readings, workshops and street performances happening near you, create your own activity, and find the collaborators or company you need to make it happen.",
+        },
+        {
+          q: "How do I find out what's happening in Istanbul tonight?",
+          a: 'Open the map and you see what is on near you right now — planned shows for tonight and this week, plus spontaneous sessions marked “happening now” while they are still going. No scrolling through group chats or event pages that were last updated in March.',
+        },
+        {
+          q: 'Where can I find concerts, theatre and workshops in Kadıköy?',
+          a: 'All of them sit on the same map. CiveMate starts in Kadıköy — Moda, Moda Sahili, Caferağa, Yeldeğirmeni and Osmanağa — covering live music, one-act play readings, poetry and book readings, sketch circles, art workshops, exhibitions and street performances.',
+        },
+        {
+          q: 'Does it cost anything to join an activity?',
+          a: 'No. Activities on CiveMate are always free to join, and CiveMate does not sell tickets.',
+        },
+        {
+          q: "I don't want to go to an event alone. What can I do?",
+          a: 'Use +1 buddy mode. Filter for activities where someone is open to bringing a companion, connect with a person who is already going, and let the event itself break the ice. An empty seat next to you stops being a reason to stay home.',
+        },
+        {
+          q: 'How do I find a bassist, photographer or collaborator in Istanbul?',
+          a: 'Create an activity and open a named role — a bassist, a photographer, a dancer, a maker. People nearby can apply to fill it, you approve who joins, and everyone’s contribution is credited on the activity page afterwards.',
+        },
+        {
+          q: "I'm a street musician. How do I get an audience?",
+          a: 'Mark your set “happening now” and you appear on the live map while you are playing, so people nearby can find you. You can also open a role if you want another musician or a photographer to join you.',
+        },
+        {
+          q: 'Can venues, theatres and cultural institutions use CiveMate?',
+          a: 'Yes. Theatres, galleries and cultural centres join the same map with verified profiles, team tools and attendance insight, so their programme sits alongside everything else happening in the neighbourhood.',
+        },
+      ],
+    },
     footer: {
       tagline: 'Sahne gerekmez. No stage required.',
       rights: '© 2026 CiveMate',
@@ -286,6 +363,45 @@ export const copy = {
       successTitle: (n) => `Teşekkürler ${n}.`,
       successBodyPre: 'CiveMate demo davetin için ',
       successBodyPost: ' adresini kullanacağız.',
+    },
+    faq: {
+      label: 'SORULAR',
+      h2a: 'BİZE EN ÇOK',
+      h2b: 'SORULANLAR.',
+      items: [
+        {
+          q: 'CiveMate nedir?',
+          a: 'CiveMate, şehrinin kültür hayatını tek bir canlı haritada toplayan bir kültürel etkinlik platformudur. Yakınında olan konserleri, tiyatroları, okumaları, atölyeleri ve sokak performanslarını görebilir, kendi etkinliğini oluşturabilir ve onu gerçekleştirmek için ihtiyacın olan insanları bulabilirsin.',
+        },
+        {
+          q: "İstanbul'da bu akşam ne olduğunu nasıl öğrenirim?",
+          a: 'Haritayı aç, yakınında şu anda ne olduğunu gör: bu akşama ve bu haftaya planlanmış etkinliklerin yanı sıra, tam o sırada devam eden ve “şimdi oluyor” diye işaretlenmiş anlık buluşmalar. Grup sohbetlerini taramana ya da en son martta güncellenmiş etkinlik sayfalarına bakmana gerek yok.',
+        },
+        {
+          q: "Kadıköy'de konser, tiyatro ve atölyeleri nerede bulurum?",
+          a: 'Hepsi aynı haritada. CiveMate Kadıköy’de başlıyor — Moda, Moda Sahili, Caferağa, Yeldeğirmeni ve Osmanağa — canlı müzik, tek perdelik oyun okumaları, şiir ve kitap okumaları, çizim halkaları, sanat atölyeleri, sergiler ve sokak performanslarıyla.',
+        },
+        {
+          q: 'Etkinliğe katılmak ücretli mi?',
+          a: 'Hayır. CiveMate’teki etkinliklere katılmak her zaman ücretsizdir ve CiveMate bilet satmaz.',
+        },
+        {
+          q: 'Etkinliğe yalnız gitmek istemiyorum, ne yapabilirim?',
+          a: '+1 modunu kullan. Birinin yanında biri getirmeye açık olduğu etkinlikleri filtrele, zaten gidecek biriyle tanış ve buzları etkinliğin kendisi kırsın. Yanındaki boş koltuk evde kalma sebebi olmaktan çıkar.',
+        },
+        {
+          q: "İstanbul'da basçı, fotoğrafçı ya da birlikte üretecek birini nasıl bulurum?",
+          a: 'Bir etkinlik oluştur ve adı konmuş bir rol aç — basçı, fotoğrafçı, dansçı, üretici. Yakındaki insanlar bu role başvurur, kimin katılacağını sen onaylarsın ve herkesin katkısı sonrasında etkinlik sayfasında emek olarak görünür.',
+        },
+        {
+          q: 'Sokak müzisyeniyim. Nasıl seyirci bulurum?',
+          a: 'Setini “şimdi oluyor” diye işaretle; çaldığın sürece canlı haritada görünürsün, böylece yakındaki insanlar seni bulabilir. Yanına başka bir müzisyen ya da fotoğrafçı katılsın istiyorsan rol de açabilirsin.',
+        },
+        {
+          q: "Mekânlar, tiyatrolar ve kültür kurumları CiveMate'i kullanabilir mi?",
+          a: 'Evet. Tiyatrolar, galeriler ve kültür merkezleri aynı haritaya doğrulanmış profiller, ekip araçları ve katılım verisiyle katılır; böylece programları mahallede olan biten her şeyin yanında yer alır.',
+        },
+      ],
     },
     footer: {
       tagline: 'Sahne gerekmez.',
